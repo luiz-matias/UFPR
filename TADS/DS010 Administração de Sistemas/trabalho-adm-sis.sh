@@ -1,10 +1,10 @@
-#!bin/bash
+#!/bin/bash
 
 #Variável que contém o path a ser considerado como pasta para realizar o Backup, caso o usuário não queira selecionar outro.
-path="$HOME/Desktop/data"
+path="$HOME/data"
 
 #Variável que contém o path a ser considerado como local do Backup.
-backupPath="$HOME/Backups"
+backupPath="$HOME/backup"
 
 main() {
   echo "Olá $USERNAME!"
@@ -81,8 +81,7 @@ navigateToRsyncConfiguration() {
 }
 
 configureRsync() {
-  (crontab -l 2>/dev/null; echo "$1 $2 $3 $4 $5 rsync -auvh --progress $path $backupPath") | crontab -
-  echo "Crontab ficou assim: $1 $2 $3 $4 $5 rsync... (executará $6)"
+  (crontab -l 2>/dev/null; echo "$1 $2 $3 $4 $5 rsync -avh --progress '$path' '$backupPath'") | crontab -
   echo "Tudo pronto! Essas foram as configurações finais do seu backup:"
   echo "Pasta que será observada: $path"
   echo "Pasta onde será armazenado o backup: $backupPath"
