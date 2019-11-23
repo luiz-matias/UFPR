@@ -67,15 +67,15 @@ navigateToRsyncConfiguration() {
   echo "3 - A cada 1 dia"
   echo "4 - A cada 1 semana"
   echo "5 - A cada 1 mês"
-  read option
+  read selection
 
-  case $option in
+  case $selection in
     1) configureRsync "*" "*" "*" "*" "*" "a cada 1 minuto" ;; #Todo minuto
     2) configureRsync "0" "*" "*" "*" "*" "a cada 1 hora, no minuto 0" ;; #Toda hora, no minuto 0
     3) configureRsync "0" "5" "*" "*" "*" "a cada 1 dia, às 05h00" ;; #Todo dia, às 05h00
     4) configureRsync "0" "5" "*" "*" "1" "a cada 1 semana, na segunda ás 05h00" ;; #Toda semana, na segunda às 05h00
     5) configureRsync "0" "5" "1" "*" "*" "a cada 1 mês, no dia 1 às 05h00" ;; #Todo Mês, no dia 1 às 05h00
-    *) echo "Ops! Parece que você selecionou um intervalo inválido, tente novamente." ; echo ; Backup ;;
+    *) echo "Você digitou uma opção inválida!"; navigateToRsyncConfiguration ;;
   esac
 
 }
@@ -87,7 +87,9 @@ configureRsync() {
   echo "Pasta que será observada: $path"
   echo "Pasta onde será armazenado o backup: $backupPath"
   echo "Periodicidade: $6"
-  read option
+  echo
+  echo "Pressione ENTER para sair"
+  read selection
 }
 
 main
