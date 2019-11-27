@@ -1,5 +1,5 @@
 program LISNUM;
-type regis=record
+type regis = record
   num:integer;
   nome:string[35];
   cpf:string[11];
@@ -9,27 +9,29 @@ type regis=record
   som,cla_ger,cla_car,car_cla:integer
 end;
 
-cc=record
+type cc=record
   pf:integer;
   c_chave:string[37];
 end;
-vetor=array[1..2000] of cc;
+
+Vetor = array[1..2000] of cc;
 
 var reg2:regis;
-NO:STRING[15];
-VV:Vetor;
-arq2:file of regis;
-CAR:STRING[2];
-a,b,c,p,e,OO,t,ant:integer;
-OOA:STRING[1];
-TOTC:ARRAY[0..97] OF INTEGER;
+var NO:STRING[15];
+var VV:Vetor;
+var arq2:file of regis;
+var CAR:STRING[2];
+var a,b,c,p,e,OO,ant:integer;
+var t, t2: integer;
+var OOA:STRING[1];
+var TOTC:ARRAY[0..12] OF INTEGER;
 var option: char;
 var aux: string;
 
 procedure ordem(var vet:vetor; t:integer);
 var aux:cc;
-tot,a,jt:integer;
-tro:boolean;
+var tot,a,jt:integer;
+var tro:boolean;
 begin
   tot:=t;
   jt:=1;
@@ -68,33 +70,35 @@ begin
   clrscr;
   assign(arq2,'CAND.IND');
   reset(arq2);
-  T:=0;
+  T := 0;
   
   REPEAT
     READ(ARQ2,REG2);
-    BEGIN
-      T:=T+1;
-      VV[T].Pf:=T;
-      
-      if (option = '1') then begin
-        STR(REG2.NUM:4,VV[T].C_CHAVE);
-      end;
-      if (option = '2') then begin
-        VV[T].C_CHAVE := REG2.NOME;
-      end;
-      if (option = '3') then begin
-        VV[T].C_CHAVE := REG2.CPF;
-      end;
-      if (option = '4') then begin
-        STR(REG2.CAR:2, AUX);
-        VV[T].C_CHAVE := CONCAT(AUX, REG2.NOME:35);
-      end;
-    END;
+    writeLn('somando ao valor de T (', T, ') mais um, resultando em:', T+1);
+    T:= T + 1;
+    VV[T].Pf := T;
+    if (option = '1') then begin
+      STR(REG2.NUM:4,VV[T].C_CHAVE);
+    end;
+    if (option = '2') then begin
+      VV[T].C_CHAVE := REG2.NOME;
+    end;
+    if (option = '3') then begin
+      VV[T].C_CHAVE := REG2.CPF;
+    end;
+    if (option = '4') then begin
+      STR(REG2.CAR:2, AUX);
+      VV[T].C_CHAVE := AUX + REG2.NOME;
+    end;
     //se op=1 c_chave=nome,se op=2 c_chave=cpf e se op=3 c_chave car+nome
   UNTIL EOF(ARQ2);
+  
+  
   WRITE('ORDENANDO...');
   ORDEM(VV,T);
   WRITELN('     ...FIM DA ORDENACAO.');
+  
+  
   FOR A:=1 TO T DO
   begin
     SEEK(ARQ2,VV[A].Pf-1);

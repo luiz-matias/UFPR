@@ -23,10 +23,10 @@ type Index = record
   pf: integer;
 end;
 var indexData: Index;
-var indexes: array[0..1013] of Index;
+var indexes: array[0..1014] of Index;
 var alunoData: Aluno;
-var alunos: array[0..1013] of Aluno;
-var notas: array [0..1013] of Nota;
+var alunos: array[0..1014] of Aluno;
+var notas: array [0..1014] of Nota;
 var i, j, k: integer;
 var arq: text;
 var arq2: file of Aluno;
