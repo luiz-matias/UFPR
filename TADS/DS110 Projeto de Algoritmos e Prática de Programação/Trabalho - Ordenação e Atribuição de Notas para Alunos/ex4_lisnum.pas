@@ -74,7 +74,6 @@ begin
   
   REPEAT
     READ(ARQ2,REG2);
-    writeLn('somando ao valor de T (', T, ') mais um, resultando em:', T+1);
     T:= T + 1;
     VV[T].Pf := T;
     if (option = '1') then begin
